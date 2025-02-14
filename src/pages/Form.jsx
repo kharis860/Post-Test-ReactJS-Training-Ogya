@@ -174,8 +174,6 @@ export default function Form() {
     console.log(data);
     if (data.type === "Pemasukan") {
       data.amount = -data.amount;
-    } else {
-      data.amount = data.amount;
     }
     const endBalance = balance + data.amount;
     deleteData(data.id, endBalance);

@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
 import { MegaMenu } from "primereact/megamenu";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "primereact/avatar";

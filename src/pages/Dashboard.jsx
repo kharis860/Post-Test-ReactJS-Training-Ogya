@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { Card } from "primereact/card";
 import { useState } from "react";
@@ -14,8 +13,7 @@ export default function Dashboard() {
   const [chartOptions, setChartOptions] = useState({});
   const { expensesZustand } = useStore();
   useEffect(() => {
-    console.log(expensesZustand);
-    // const dataAmount = expensesZustand.amount.map((item, idex) => item.amount);
+    // console.log(expensesZustand);
     const dataOutAmount = expensesZustand.map((item) =>
       item.type === "Pengeluaran" ? item.amount : 0
     );
@@ -52,7 +50,7 @@ export default function Dashboard() {
 
     setChartData(data);
     setChartOptions(options);
-  }, []);
+  }, [expensesZustand]);
   return (
     <div className="flex flex-column min-h-screen">
       <Navbar />
