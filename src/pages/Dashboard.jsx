@@ -66,33 +66,36 @@ export default function Dashboard() {
                 Welcome, Kharis
               </h2>
             </div>
-            <div>
-              <div className="flex-auto">
-                <label
-                  htmlFor="buttondisplay"
-                  className="font-bold block text-center mb-2"
-                >
-                  Tanggal Awal Bulan
-                </label>
-                <Calendar
-                  id="buttondisplay"
-                  value={date}
-                  onChange={(e) => setDate(e.value)}
-                  showIcon
-                  view="date"
-                  dateFormat="dd"
-                  monthNavigator={false}
-                  yearNavigator={false}
+            <div className="grid w-full">
+              <div className="col-12 md:col-8 flex justify-content-center">
+                <Chart
+                  type="doughnut"
+                  data={chartData}
+                  options={chartOptions}
+                  className="w-full md:w-30rem flex justify-content-center"
+                  style={{ maxHeight: "260px" }}
                 />
               </div>
-            </div>
-            <div className="card flex justify-content-center">
-              <Chart
-                type="doughnut"
-                data={chartData}
-                options={chartOptions}
-                className="w-full md:w-30rem"
-              />
+              <div className="col-12 md:col-4 flex justify-content-center align-items-center gap-4">
+                <div className="flex-auto">
+                  <label
+                    htmlFor="buttondisplay"
+                    className="font-bold block text-center mb-2"
+                  >
+                    Tanggal Awal Bulan
+                  </label>
+                  <Calendar
+                    id="buttondisplay"
+                    value={date}
+                    onChange={(e) => setDate(e.value)}
+                    showIcon
+                    view="date"
+                    dateFormat="dd"
+                    monthNavigator={false}
+                    yearNavigator={false}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </Card>
