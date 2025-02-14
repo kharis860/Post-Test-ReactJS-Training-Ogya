@@ -1,0 +1,7 @@
+.my-swal-container {
+  z-index: 1500 !important;
+}
+
+.p-dialog {
+  z-index: 1000;
+}
