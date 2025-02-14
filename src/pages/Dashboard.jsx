@@ -6,27 +6,41 @@ import { useState } from "react";
 import { Calendar } from "primereact/calendar";
 import { Chart } from "primereact/chart";
 import { useEffect } from "react";
+import useStore from "../Zustand/store";
 
 export default function Dashboard() {
   const [date, setDate] = useState(null);
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
-
+  const { expensesZustand } = useStore();
   useEffect(() => {
+    console.log(expensesZustand);
+    // const dataAmount = expensesZustand.amount.map((item, idex) => item.amount);
+    const dataOutAmount = expensesZustand.map((item) =>
+      item.type === "Pengeluaran" ? item.amount : 0
+    );
+    const dataInAmount = expensesZustand.map((item) =>
+      item.type === "Pemasukan" ? item.amount : 0
+    );
+    const totalOutAmount = dataOutAmount.reduce((acc, curr) => acc + curr, 0);
+    const totalInAmount = dataInAmount.reduce((acc, curr) => acc + curr, 0);
+    console.log(totalOutAmount);
+    console.log(totalInAmount);
+
     const documentStyle = getComputedStyle(document.documentElement);
     const data = {
-      labels: ["A", "B", "C"],
+      labels: ["Pemasukan", "Pengeluaran"],
       datasets: [
         {
-          data: [300, 50, 100],
+          data: [totalInAmount, totalOutAmount],
           backgroundColor: [
             documentStyle.getPropertyValue("--blue-500"),
-            documentStyle.getPropertyValue("--yellow-500"),
+            // documentStyle.getPropertyValue("--yellow-500"),
             documentStyle.getPropertyValue("--green-500"),
           ],
           hoverBackgroundColor: [
             documentStyle.getPropertyValue("--blue-400"),
-            documentStyle.getPropertyValue("--yellow-400"),
+            // documentStyle.getPropertyValue("--yellow-400"),
             documentStyle.getPropertyValue("--green-400"),
           ],
         },
