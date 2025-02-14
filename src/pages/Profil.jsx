@@ -13,10 +13,15 @@ export default function Profil() {
         >
           <div className="card " style={{ width: "25rem" }}>
             <Card title="User Profil">
-              <div className="flex flex-column align-items-center justify-content-center gap-3">
-                <Avatar image="/pp.jpg" size="xlarge" shape="circle" />
+              <div className="flex flex-column align-items-center justify-content-center gap-2">
+                <Avatar
+                  image="/pp.jpg"
+                  className="w-8rem h-8rem"
+                  shape="circle"
+                />
                 <h2 className="m-0 font-bold">Kharis Rahmat Hidayat</h2>
-                <p className="text-sm text-500">Kharisrahmat686@gmail.com</p>
+                <h3 className="text-sm text-500">Divisi 1 Front End</h3>
+                <h3 className="text-sm text-500">PT Ogya Tekno Nusantara</h3>
               </div>
             </Card>
           </div>

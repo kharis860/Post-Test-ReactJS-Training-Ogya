@@ -34,7 +34,6 @@ export default function Form() {
         onClick={() => {
           setIsEdit(true);
           setVisible(true);
-          console.log(rowData);
           setFormInput({ ...rowData, date: new Date(rowData.date) });
         }}
       />
@@ -72,7 +71,6 @@ export default function Form() {
     ></Tag>
   );
   function addTransactionData() {
-    console.log(formInput);
     if (
       !formInput.date ||
       !formInput.amount ||
@@ -83,7 +81,13 @@ export default function Form() {
         icon: "error",
         title: "Oops...",
         text: "Form tidak boleh kosong!",
+        backdrop: `rgba(0,0,0,0.4)`,
+        allowOutsideClick: false,
+        customClass: {
+          container: "my-swal-container",
+        },
       });
+      return;
     }
     const newExpense = {
       ...formInput,
@@ -98,8 +102,6 @@ export default function Form() {
     if (newExpense.type === "Pengeluaran") {
       newExpense.amount = -newExpense.amount;
     }
-    console.log(newExpense);
-
     addData(newExpense, endBalance);
     Swal.fire({
       icon: "success",
@@ -122,30 +124,21 @@ export default function Form() {
   }
   function updateTransactionData(id, updatedExpense) {
     const oldExpense = expensesZustand.find((expense) => expense.id === id);
-    console.log(oldExpense);
-    console.log(id);
-    console.log(updatedExpense);
     const updatedExpenseDateFormated = {
       ...updatedExpense,
       date: format(new Date(updatedExpense.date), "yyyy-MM-dd"),
     };
-    console.log("date formated", updatedExpenseDateFormated);
-
     let balanceAdjustment = 0;
     if (oldExpense.type === "Pengeluaran") {
       balanceAdjustment += oldExpense.amount; // Add back the old expense
     } else {
       balanceAdjustment -= oldExpense.amount; // Remove the old income
     }
-    console.log("balanceAdjustment", balanceAdjustment);
-
     if (updatedExpenseDateFormated.type === "Pengeluaran") {
       balanceAdjustment -= updatedExpenseDateFormated.amount; // Subtract new expense
     } else {
       balanceAdjustment += updatedExpenseDateFormated.amount; // Add new income
     }
-    console.log("balanceAdjustment", balanceAdjustment);
-
     const newBalance = balance + balanceAdjustment;
     updateData(id, updatedExpenseDateFormated, newBalance);
     Swal.fire({
@@ -162,7 +155,6 @@ export default function Form() {
         setVisible(false);
       }
     });
-    console.log("ini dari zustand", expensesZustand);
     setFormInput({
       date: "",
       amount: 0,
@@ -171,7 +163,6 @@ export default function Form() {
     });
   }
   function deleteTransactionData(data) {
-    console.log(data);
     if (data.type === "Pemasukan") {
       data.amount = -data.amount;
     }
@@ -214,9 +205,9 @@ export default function Form() {
       <div className=" p-4">
         <div className="card flex justify-content-center">
           <Dialog
-            header=""
+            header="Form transaksi"
             visible={visible}
-            style={{ width: "50vw" }}
+            style={{ width: "40vw" }}
             onHide={() => {
               if (!visible) return;
               setVisible(false);

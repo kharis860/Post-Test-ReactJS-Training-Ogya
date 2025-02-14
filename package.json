@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "cra-template": "1.2.0",
     "date-fns": "^4.1.0",
     "prime": "^0.5.0",

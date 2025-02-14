@@ -5,3 +5,12 @@
 .p-dialog {
   z-index: 1000;
 }
+
+.p-selectbutton {
+  display: flex;
+  width: 100%;
+}
+
+.p-selectbutton .p-button {
+  flex: 1;
+}
